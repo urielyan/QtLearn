@@ -1,22 +1,16 @@
 #include "setupdatetime.h"
-#include "ui_setupdatetime.h"
 #include "global.h"
 
 #include <QMessageBox>
 #include <QHBoxLayout>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 setupdatetime::setupdatetime(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::setupdatetime)
+    QWidget(parent)
 {
     this->setFixedSize(800, 480);
-//    ui->setupUi(this);
-//    this->setFont(QFont(FONT_NAME, FONT_SIZE ,QFont::Normal));
-//    ui->dateTimeEdit->setFont(QFont(FONT_NAME, FONT_SIZE*2 ,QFont::Normal));
-//    ui->dateTimeEdit->setButtonSymbols(QAbstractSpinBox::NoButtons);
-
     QHBoxLayout *p_HLayoutSetDateTime = new QHBoxLayout;
-//    ui->verticalLayout->addLayout(p_HLayout);
 
     QList<QLabel*> m_labelListUnit;
     for(int i = 0; i < 5; i++)
@@ -66,18 +60,20 @@ setupdatetime::setupdatetime(QWidget *parent) :
     connect(p_cancelButton, SIGNAL(clicked(bool)),this,SLOT(close()));
 
     QPushButton *p_SaveButton = new QPushButton(tr("保存"));
-    connect(p_SaveButton, SIGNAL(clicked(bool)), this, SLOT(on_pushButton_2_clicked()));
+    connect(p_SaveButton, SIGNAL(clicked(bool)), this, SLOT(slotSaveButtonClicked()));
 
     QHBoxLayout *p_HLayoutCancelSave = new QHBoxLayout;
     p_HLayoutCancelSave->addWidget(p_cancelButton);
     p_HLayoutCancelSave->addWidget(p_SaveButton);
 
-    QLabel *p_label = new QLabel(tr({"设置时间"}));
+    QLabel *p_label = new QLabel(tr("设置时间"));
+    p_label->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
     p_label->setObjectName("title");
     p_label->setAlignment(Qt::AlignHCenter | Qt::AlignCenter);
 
     QVBoxLayout *p_vLayoutMain = new QVBoxLayout(this);
-    //p_vLayoutMain->addWidget(p_label);
+    p_vLayoutMain->setSpacing(0);
+    p_vLayoutMain->addWidget(p_label);
     p_vLayoutMain->addLayout(p_HLayoutSetDateTime);
     p_vLayoutMain->addLayout(p_HLayoutCancelSave);
 
@@ -88,19 +84,18 @@ setupdatetime::setupdatetime(QWidget *parent) :
                         "QPushButton#bottombutton, QPushButton#upbutton{text-align:center;}");
 }
 
-void setupdatetime::on_pushButton_2_clicked()
+void setupdatetime::slotSaveButtonClicked()
 {
     //ok button
     QMessageBox box;
     box.setFont(QFont(FONT_NAME, FONT_SIZE ,QFont::Normal));
-    box.setText("需要保存此次修改的日期和时间么？");
+    box.setText(tr("需要保存此次修改的日期和时间么？\n") + getSetDateTime());
     box.setStandardButtons(QMessageBox::Cancel|QMessageBox::Yes);
     int res = box.exec();
     if(res == QMessageBox::Yes){
         QString tmpstr("date -s ");
         tmpstr += " \"";
-        tmpstr.append(ui->dateTimeEdit->dateTime().toString("yyyy-MM-dd HH:mm:ss"));
-        qDebug() << ui->dateTimeEdit->dateTime().toString("yyyy-MM-dd HH:mm:ss") << getSetDateTime();
+        tmpstr.append(getSetDateTime());
         tmpstr += "\"";
         int a = system(tmpstr.toLocal8Bit());
         int b = system("hwclock --systohc");
@@ -118,69 +113,11 @@ void setupdatetime::on_pushButton_2_clicked()
 }
 
 void setupdatetime::show_and_refresh(){
-  examineDayLabelIsRight();
-  this->showFullScreen();
+    setLabelCurrentDateTime();
+    examineDayLabelIsRight();
+    this->showFullScreen();
 }
 
-void setupdatetime::on_p_buttonPlus_clicked()
-{
-    switch (ui->dateTimeEdit->currentSection()) {
-    case QDateTimeEdit::NoSection:
-        break;
-    case QDateTimeEdit::SecondSection:
-        ui->dateTimeEdit->setTime(ui->dateTimeEdit->time().addSecs(5));
-        break;
-    case QDateTimeEdit::MinuteSection:
-        ui->dateTimeEdit->setTime(ui->dateTimeEdit->time().addSecs(60));
-        break;
-    case QDateTimeEdit::HourSection:
-        ui->dateTimeEdit->setTime(ui->dateTimeEdit->time().addSecs(3600));
-        break;
-    case QDateTimeEdit::DaySection:
-        ui->dateTimeEdit->setDate(ui->dateTimeEdit->date().addDays(1));
-        break;
-    case QDateTimeEdit::MonthSection:
-        ui->dateTimeEdit->setDate(ui->dateTimeEdit->date().addMonths(1));
-        break;
-    case QDateTimeEdit::YearSection:
-        ui->dateTimeEdit->setDate(ui->dateTimeEdit->date().addYears(1));
-        break;
-    default:
-        break;
-    }
-
-}
-
-void setupdatetime::on_p_buttonSub_clicked()
-{
-    {
-        switch (ui->dateTimeEdit->currentSection()) {
-        case QDateTimeEdit::NoSection:
-            break;
-        case QDateTimeEdit::SecondSection:
-            ui->dateTimeEdit->setTime(ui->dateTimeEdit->time().addSecs(-5));
-            break;
-        case QDateTimeEdit::MinuteSection:
-            ui->dateTimeEdit->setTime(ui->dateTimeEdit->time().addSecs(-60));
-            break;
-        case QDateTimeEdit::HourSection:
-            ui->dateTimeEdit->setTime(ui->dateTimeEdit->time().addSecs(-3600));
-            break;
-        case QDateTimeEdit::DaySection:
-            ui->dateTimeEdit->setDate(ui->dateTimeEdit->date().addDays(-1));
-            break;
-        case QDateTimeEdit::MonthSection:
-            ui->dateTimeEdit->setDate(ui->dateTimeEdit->date().addMonths(-1));
-            break;
-        case QDateTimeEdit::YearSection:
-            ui->dateTimeEdit->setDate(ui->dateTimeEdit->date().addYears(-1));
-            break;
-        default:
-            break;
-        }
-
-    }
-}
 
 void setupdatetime::slotButtonUpClicked(int id)
 {

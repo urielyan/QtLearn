@@ -8,10 +8,6 @@
 
 #include<QLabel>
 #include <QDateTime>
-namespace Ui {
-
-class setupdatetime;
-}
 
 class setupdatetime : public QWidget
 {
@@ -30,17 +26,12 @@ public:
   void show_and_refresh();
 
 private slots:
-    void on_pushButton_2_clicked();
-
-    void on_p_buttonPlus_clicked();//useless
-
-    void on_p_buttonSub_clicked();//useless
+    void slotSaveButtonClicked();
 
     void slotButtonUpClicked(int id);
     void slotButtonDownClicked(int id);
 
 private:
-    Ui::setupdatetime *ui;
     QButtonGroup m_buttonGroupUp, m_buttonGroupDown;
     QList<QLabel*> m_labelList;
 

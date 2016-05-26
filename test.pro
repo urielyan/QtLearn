@@ -24,5 +24,4 @@ HEADERS  += widget.h \
     setupdatetime.h \
     learnqpainter.h
 
-FORMS    += widget.ui \
-    setupdatetime.ui
+FORMS    += widget.ui
