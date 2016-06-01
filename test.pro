@@ -14,14 +14,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         widget.cpp \
-    mvctest.cpp \
+    learn/mvctest.cpp \
     setupdatetime.cpp \
-    learnqpainter.cpp
+    learn/learnqpainter.cpp
 
 HEADERS  += widget.h \
-    mvctest.h \
+    learn/mvctest.h \
     global.h \
     setupdatetime.h \
-    learnqpainter.h
+    learn/learnqpainter.h
 
 FORMS    += widget.ui
+
+unix:INCLUDEPATH += "/home/yange/QtCode/QtLearn/learn"
