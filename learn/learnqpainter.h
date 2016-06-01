@@ -9,6 +9,8 @@ class LearnQPainter : public QWidget
 public:
     explicit LearnQPainter(QWidget *parent = 0);
 
+protected:
+    void paintEvent(QPaintEvent *e);
 
 signals:
 
