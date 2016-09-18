@@ -4,8 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
-
+QT       += core gui sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = test
@@ -13,17 +12,30 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        widget.cpp \
     learn/mvctest.cpp \
     setupdatetime.cpp \
-    learn/learnqpainter.cpp
+    learn/learnqpainter.cpp \
+    trendcontextbutton.cpp \
+    learn/exception.cpp \
+    learn/metaobject.cpp \
+    learn/styleoptionstudy.cpp \
+    learn/database.cpp \
+    learn/syslogstudy.cpp \
+    learn/testforlooptime.cpp
 
-HEADERS  += widget.h \
+HEADERS  += \
     learn/mvctest.h \
     global.h \
     setupdatetime.h \
-    learn/learnqpainter.h
+    learn/learnqpainter.h \
+    trendcontextbutton.h \
+    learn/exception.h \
+    learn/metaobject.h \
+    learn/styleoptionstudy.h \
+    learn/database.h \
+    learn/syslogstudy.h \
+    learn/testforlooptime.h
 
-FORMS    += widget.ui
+FORMS    +=
 
 unix:INCLUDEPATH += "/home/yange/QtCode/QtLearn/learn"
