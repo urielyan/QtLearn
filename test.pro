@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     learn/styleoptionstudy.cpp \
     learn/database.cpp \
     learn/syslogstudy.cpp \
-    learn/testforlooptime.cpp
+    learn/testforlooptime.cpp \
+    learn/customscrollbar.cpp
 
 HEADERS  += \
     learn/mvctest.h \
@@ -34,7 +35,8 @@ HEADERS  += \
     learn/styleoptionstudy.h \
     learn/database.h \
     learn/syslogstudy.h \
-    learn/testforlooptime.h
+    learn/testforlooptime.h \
+    learn/customscrollbar.h
 
 FORMS    +=
 

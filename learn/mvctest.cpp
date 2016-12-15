@@ -1,3 +1,4 @@
+#include "customscrollbar.h"
 #include "mvctest.h"
 #include "../trendcontextbutton.h"
 
@@ -77,32 +78,8 @@ void MVCTest::initView(QTableView *p_tableview)
     p_tableview->horizontalHeader()->resizeSection(0,50); //TODO: useless,设置表头第一列的宽度为150//
     //p_tableview->horizontalHeader()->setFixedWidth(900);
 
+    p_tableview->setVerticalScrollBar(new CustomScrollBar(p_tableview));
 
-    p_tableview->horizontalHeader()->setStyleSheet("QHeaderView{"
-                                                   "text-align:left center;"
-                                                   "}"
-                                                   "QHeaderView::section {"
-                                                   "height: 40px;"
-                                                   "background-color: rgb(250, 250, 250);"
-                                                   "color: black;"
-                                                   "padding-left: 4px;"
-                                                   "border: 1px solid rgb(235, 235, 235);"
-                                                   "}"); //设置表头背景色
-
-    //p_tableview->setStyleSheet("QTableView{selection-background-color:red;}"); //设置选中背景色
-
-
-    p_tableview->horizontalScrollBar()->setStyleSheet("QScrollBar{background:transparent; height:30px;}"
-      "QScrollBar::handle{background:lightgray; border:2px solid transparent; border-radius:5px;}"
-      "QScrollBar::handle:hover{background:gray;}"
-      "QScrollBar::sub-line{background:red;}"
-      "QScrollBar::add-line{background:transparent;}");
-
-      p_tableview->verticalScrollBar()->setStyleSheet("QScrollBar{background:transparent; width: 30px;}"
-      "QScrollBar::handle{background:lightgray; border:2px solid transparent; border-radius:5px;}"
-      "QScrollBar::handle:hover{background:gray;}"
-      "QScrollBar::sub-line{background:red;}"
-      "QScrollBar::add-line{background:red;}");
 }
 
 QAbstractItemModel *MVCTest::initQStandardItemModel(QTableView *p_tableview)

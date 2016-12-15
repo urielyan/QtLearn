@@ -7,8 +7,6 @@
 
 #include "setupdatetime.h"
 #include "trendcontextbutton.h"
-#include "styleoptionstudy.h"
-#include "testforlooptime.h"
 
 #include <QApplication>
 #include <QFrame>
@@ -29,44 +27,17 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    a.setStyleSheet("QTableView::section {selection-background-color:red;}");
-
-    TestForLoopTime testFroTime;
-    testFroTime.test();
-
-    //    setupdatetime w;
-//    w.show();
-
-//    LearnQPainter learnPaint;
-//    learnPaint.showMaximized();
-
-//    MVCTest mvc;
-//    mvc.show();
-
-    DataBase db;
+    MVCTest db;
     db.show();
-    qDebug()<< "size:" << sizeof(db) << sizeof(testFroTime);
-//    WinAbstractTrendContextDialog dialog;
-//    dialog.exec();
-
-//    StyleOptionStudy s;
-//    s.show();
 
     try
     {
         testQFileResize();
-        MetaObjectNoQObject mNo;
-        //throw Exception(1);
-        // m;
     }
     catch(int i)
     {
         qDebug() << i;
     }
-
-//    catch (QException e) {
-//        qDebug() << "success";
-//    }
 
     return a.exec();
 

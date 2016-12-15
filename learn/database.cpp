@@ -7,6 +7,8 @@
 #include <QApplication>
 #include <QDesktopWidget>
 
+#include "customscrollbar.h"
+
 DataBase::DataBase()
 {
     if(connectDataBase("QSQLITE", "test.db"))
@@ -71,33 +73,6 @@ void DataBase::initView()
     p_Tableview->horizontalHeader()->setStretchLastSection(true); //设置充满表宽度
     //p_Tableview->horizontalHeader()->resizeSection(0,100); //TODO: useless,设置表头第一列的宽度为150//
     //m_view->horizontalHeader()->setFixedWidth(900);
-
-
-    p_Tableview->horizontalHeader()->setStyleSheet("QHeaderView{"
-                                                   "text-align:left center;"
-                                                   "}"
-                                                   "QHeaderView::section {"
-                                                   "height: 40px;"
-                                                   "background-color: rgb(250, 250, 250);"
-                                                   "color: black;"
-                                                   "padding-left: 4px;"
-                                                   "border: 1px solid rgb(235, 235, 235);"
-                                                   "}"); //设置表头背景色
-
-    //m_view->setStyleSheet("QTableView{selection-background-color:red;}"); //设置选中背景色
-
-
-    p_Tableview->horizontalScrollBar()->setStyleSheet("QScrollBar{background:transparent; height:30px;}"
-      "QScrollBar::handle{background:lightgray; border:2px solid transparent; border-radius:5px;}"
-      "QScrollBar::handle:hover{background:gray;}"
-      "QScrollBar::sub-line{background:red;}"
-      "QScrollBar::add-line{background:transparent;}");
-
-      p_Tableview->verticalScrollBar()->setStyleSheet("QScrollBar{background:transparent; width: 30px;}"
-      "QScrollBar::handle{background:lightgray; border:2px solid transparent; border-radius:5px;}"
-      "QScrollBar::handle:hover{background:gray;}"
-      "QScrollBar::sub-line{background:red;}"
-                                                 "QScrollBar::add-line{background:red;}");
 }
 
 void DataBase::initSqlTableModel()
